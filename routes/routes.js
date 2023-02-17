@@ -25,4 +25,18 @@ router.get(
   })
 );
 
+// Create one subject
+router.post(
+  "/subject",
+  wrapAsync(async (req, res, next) => {
+    console.log("request", req);
+    const subject = new Subject({
+      name: req.body.name,
+      numberOfUpvotes: req.body.numberOfUpvotes,
+    });
+    await subject.save();
+    res.status(201).json(subject);
+  })
+);
+
 module.exports = router;
